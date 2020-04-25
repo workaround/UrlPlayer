@@ -83,14 +83,14 @@ CastPlayer.prototype.initializeCastPlayer = function() {
 
   if (!chrome.cast || !chrome.cast.isAvailable) {
     if (this.tries++ > 10) {
-      $('#extension').html("Looks like you don't have the Chromecast Extension. <a target=\"_blank\" href=\"https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd\">Click here to Install it</a> and then reload the page");
+      $('#extension').html("Sembra che tu non abbia l'estensione Chromecast. <a target=\"_blank\" href=\"https://chrome.google.com/webstore/detail/google-cast/boadgeojelhgndaghljhdicfkmllpafd\">Fai click qui per installarla</a> dopodiché ricarica questa pagina");
       return;
     }
     setTimeout(this.initializeCastPlayer.bind(this), 1000);
     return;
   }
 
-  $('#extension').html("Chromecast Extension is already installed");
+  $('#extension').html("L'estensione Chromecast è già installata");
   // default set to the default media receiver app ID
   // optional: you may change it to point to your own
   var applicationID = chrome.cast.media.DEFAULT_MEDIA_RECEIVER_APP_ID;
@@ -123,8 +123,8 @@ CastPlayer.prototype.onError = function() {
 CastPlayer.prototype.sessionListener = function(e) {
   this.session = e;
   if( this.session ) {
-    $('#chromecast').html("Connected to <b>" + this.session.receiver.friendlyName + "</b>");
-    $('#modal_play_text').html("Play on Chromecast");
+    $('#chromecast').html("Connesso a <b>" + this.session.receiver.friendlyName + "</b>");
+    $('#modal_play_text').html("Riproduci su Chromecast");
     this.deviceState = DEVICE_STATE.ACTIVE;
     if( this.session.media[0] ) {
       this.onMediaDiscovered('activeSession', this.session.media[0]);
@@ -180,8 +180,8 @@ CastPlayer.prototype.launchApp = function() {
 CastPlayer.prototype.onRequestSessionSuccess = function(e) {
   console.log("session success: " + e.sessionId);
   this.session = e;
-  $('#chromecast').html("Connected to <b>" + this.session.receiver.friendlyName + "</b>");
-  $('#modal_play_text').html("Play on Chromecast");
+  $('#chromecast').html("Connesso a <b>" + this.session.receiver.friendlyName + "</b>");
+  $('#modal_play_text').html("Riproduci su Chromecast");
   this.deviceState = DEVICE_STATE.ACTIVE;
   this.session.addUpdateListener(this.sessionUpdateListener.bind(this));
 };
@@ -195,8 +195,8 @@ CastPlayer.prototype.onLaunchError = function() {
  * Stops the running receiver application associated with the session.
  */
 CastPlayer.prototype.stopApp = function() {
-  $('#chromecast').html("Click to connect to your Chromecast");
-  $('#modal_play_text').html("Connect to Chromecast to Start Playback");
+  $('#chromecast').html("Fai click per connettere alla tua Chromecast");
+  $('#modal_play_text').html("Connetti a Chromecast per iniziare la riproduzione");
   this.session.stop(this.onStopAppSuccess.bind(this, 'Session stopped'),
   this.onError.bind(this));
 };
@@ -209,7 +209,7 @@ CastPlayer.prototype.onStopAppSuccess = function(message) {
   this.deviceState = DEVICE_STATE.IDLE;
   this.castPlayerState = PLAYER_STATE.IDLE;
   this.currentMediaSession = null;
-  $('#chromecast').html("Click to connect to your Chromecast");
+  $('#chromecast').html("Fai click per connettere al tuo Chromecast");
   clearInterval(this.timer);
 };
 

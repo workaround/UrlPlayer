@@ -94,7 +94,7 @@ function seekTo() {
 }
 
 function stop() {
-  var reply = confirm("This will stop playback on the TV. Are you sure?");
+  var reply = confirm("Questo fermerà la riproduzione sulla TV. Sei sicuro?");
   if (reply == true) {
     player.stopApp();
     $('#controls').hide();
